@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http'; // Importa HttpHeaders
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -16,11 +16,16 @@ export class RatingService {
   }
 
   getAllRatings(): Observable<any> {
-    return this.http.get('http://localhost:5000/getAllRatings');
+    return this.http.get(`${this.apiUrl}/getAllRatings`);
   }
 
   getAllRatingsResults(): Observable<any> {
-    return this.http.get('http://localhost:5000/getRatingResults');
+    return this.http.get(`${this.apiUrl}/getRatingResults`);
   }
-  
+
+  downloadRatingExcel(ratingId: string): Observable<Blob> { // Nuova funzione
+    const headers = new HttpHeaders().append('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    return this.http.get(`${this.apiUrl}/downloadRatings?ratingId=${ratingId}`, { headers: headers, responseType: 'blob' });
+  }
+
 }

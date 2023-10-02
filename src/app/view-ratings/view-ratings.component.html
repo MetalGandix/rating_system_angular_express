@@ -1,19 +1,22 @@
 <table *ngIf="ratings.length">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Data</th>
-        <th>Risposta</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let rating of ratings">
-        <td>{{ rating.id }}</td>
-        <td>{{ rating.timestamp }}</td>
-        <td>{{ rating.data }}</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <p *ngIf="!ratings.length">Nessun rating disponibile.</p>
-  
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Data</th>
+      <th>Risposta</th>
+      <th>Azione</th> <!-- Colonna aggiunta per i bottoni -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let rating of ratings">
+      <td>{{ rating.id }}</td>
+      <td>{{ rating.timestamp }}</td>
+      <td>{{ rating.data }}</td>
+      <td>
+          <button (click)="downloadExcel(rating.id)">Scarica Excel</button>
+      </td> <!-- Bottoni aggiunti in questa colonna -->
+    </tr>
+  </tbody>
+</table>
+
+<p *ngIf="!ratings.length">Nessun rating disponibile.</p>

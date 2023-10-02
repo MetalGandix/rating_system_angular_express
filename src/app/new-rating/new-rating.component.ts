@@ -16,11 +16,19 @@ export class NewRatingComponent implements OnInit {
   riferimentoRowSpan: { [key: string]: number } = {};
 
   questionsCarne: RatingQuestion[] = [
-    // Qui puoi inserire le domande specifiche per la carne
+    {
+      id: 1,
+      riferimento: 'Reg. 852/04, All II, Cap I, Punto 1',
+      requisiti: 'Le strutture destinate agli alimenti sono tenute pulite, sottoposte a manutenzione e tenute in buone condizioni ?'
+    },
+    {
+      id: 2,
+      riferimento: 'Reg. 852/04, All II, Cap. I, Punto 2, Lettera a)',
+      requisiti: '- consentono un’adeguata manutenzione, pulizia e/o disinfezione e evitano o riducono al minimo la contaminazione aerea assicurando uno spazio di lavoro tale da consentire lo svolgimento di tutte le operazioni in condizioni d’igiene?'
+    },
   ];
-
+  
   questionsLatte: RatingQuestion[] = [
-    // Qui puoi inserire le domande specifiche per il latte
   ];
 
   questionsTrasporto: RatingQuestion[] = [

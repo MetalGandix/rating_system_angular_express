@@ -19,4 +19,14 @@ export class ViewRatingsComponent implements OnInit {
     });
   }
 
+  downloadExcel(ratingId: string): void {
+    this.ratingService.downloadRatingExcel(ratingId).subscribe(data => {
+      const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      const downloadURL = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = downloadURL;
+      link.download = 'ratings.xlsx';
+      link.click();
+    });
+  }
 }
