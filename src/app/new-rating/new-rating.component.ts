@@ -110,15 +110,22 @@ export class NewRatingComponent implements OnInit {
         selectedQuestions = this.questionsTrasporto;
     }
 
-    // Estrai solo id e risposta per ogni domanda
-    const ratingsToSend = selectedQuestions.map(question => {
-        return {
-            id: question.id,
-            risposta: question.risposta
-        };
-    });
+    // Determina la categoria selezionata
+    let selectedCategory = '';
+    if (this.isCarne) {
+        selectedCategory = 'Carne';
+    } else if (this.isLatte) {
+        selectedCategory = 'Latte';
+    } else if (this.isTrasporto) {
+        selectedCategory = 'Trasporto';
+    }
 
-    console.log(ratingsToSend);  // Questo ti mostrerà una lista di oggetti con solo id e risposta
+    const ratingsToSend = {
+        category: selectedCategory,
+        questions: selectedQuestions
+    };
+
+    console.log(ratingsToSend);  // Questo ti mostrerà l'intero oggetto contenente la categoria e le domande
 
     this.ratingService.saveRatings(ratingsToSend).subscribe({
         next: response => {
@@ -129,6 +136,7 @@ export class NewRatingComponent implements OnInit {
         }
     });
 }
+
 }
 
 export interface RatingQuestion {

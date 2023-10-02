@@ -2,13 +2,15 @@
     <thead>
       <tr>
         <th>ID</th>
+        <th>Data</th>
         <th>Risposta</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let rating of ratings">
         <td>{{ rating.id }}</td>
-        <td>{{ rating.risposta }}</td>
+        <td>{{ rating.timestamp }}</td>
+        <td>{{ rating.data }}</td>
       </tr>
     </tbody>
   </table>
