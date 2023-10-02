@@ -1,0 +1,94 @@
+.rating-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .rating-table, .rating-table th, .rating-table td {
+    border: 1px solid #ddd;
+  }
+  
+  .rating-table th, .rating-table td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  .rating-table th {
+    background-color: #f2f2f2;
+  }
+  
+  /* Opzionale: aggiungi stili per rendere la tabella più bella */
+  .rating-table tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .rating-table tbody td input[type="radio"] {
+    margin-right: 5px;
+  }
+
+  button {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 18px;  /* dimensione font più grande */
+    width: 200px;     /* larghezza fissa per i bottoni */
+    margin: 10px;     /* maggiore margine tra i bottoni */
+  }
+  
+  button:hover {
+    background-color: #eee;
+  }
+  
+  .rating-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .rating-table th, .rating-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .rating-table thead {
+    background-color: #f5f5f5;
+  }
+
+  button[ng-reflect-router-link="/"] {
+    background-color: transparent;  /* per rimuovere lo stile da un pulsante specifico */
+    font-size: 14px;
+    width: auto;
+  }
+  
+  button.carne-btn {
+    background-color: #d2a679;  /* marroncino chiaro */
+  }
+  
+  button.latte-btn {
+    background-color: white;
+    color: black;  /* colore del testo nero per maggiore leggibilità */
+    border: 1px solid #ccc;  /* un leggero bordo per differenziarlo dallo sfondo */
+  }
+  
+  button.trasporto-btn {
+    background-color: #a9a9a9;  /* grigio */
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  /* per prendere l'intera altezza della vista */
+    flex-direction: column;  /* per disporre i bottoni verticalmente */
+  }  
+
+  /* ... gli stili esistenti ... */
+
+.container.choosen {
+  height: auto;  /* ripristina l'altezza normale del contenitore */
+  align-items: flex-start;  /* allinea i contenuti all'inizio */
+}

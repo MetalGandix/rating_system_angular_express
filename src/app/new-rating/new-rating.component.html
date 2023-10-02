@@ -1,0 +1,104 @@
+<div [ngClass]="{'container': true, 'choosen': choosen}">
+    <div *ngIf="!choosen">
+      <button class="carne-btn" (click)="carneTrue()">Carne</button>
+      <button class="latte-btn" (click)="latteTrue()">Latte</button>
+      <button class="trasporto-btn" (click)="trasportoTrue()">Trasporto</button>
+    </div>
+
+<table *ngIf="isCarne" class="rating-table">
+    <!-- Intestazione -->
+    <thead>
+        <tr>
+            <th>Pos.</th>
+            <th>Riferimento</th>
+            <th>ACCERTAMENTO DEI REQUISITI GENERALI: TRASPORTO</th>
+            <th>Sì</th>
+            <th>No</th>
+            <th>N.A.</th>
+            <th>N.V.</th>
+            <th>N.N.</th>
+            <th>N.P.</th>
+        </tr>
+    </thead>
+    <!-- Corpo -->
+    <tbody>
+        <tr *ngFor="let question of questionsCarne">
+            <td>{{ question.id }}</td>
+            <td>{{ question.riferimento }}</td>
+            <td>{{ question.requisiti }}</td>
+            <td *ngFor="let option of ['Sì', 'No', 'N.A.', 'N.V.', 'N.N.', 'N.P.']">
+                <label>
+                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
+                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                </label>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<table *ngIf="isLatte" class="rating-table">
+    <!-- Intestazione -->
+    <thead>
+        <tr>
+            <th>Pos.</th>
+            <th>Riferimento</th>
+            <th>ACCERTAMENTO DEI REQUISITI GENERALI: TRASPORTO</th>
+            <th>Sì</th>
+            <th>No</th>
+            <th>N.A.</th>
+            <th>N.V.</th>
+            <th>N.N.</th>
+            <th>N.P.</th>
+        </tr>
+    </thead>
+    <!-- Corpo -->
+    <tbody>
+        <tr *ngFor="let question of questionsLatte">
+            <td>{{ question.id }}</td>
+            <td>{{ question.riferimento }}</td>
+            <td>{{ question.requisiti }}</td>
+            <td *ngFor="let option of ['Sì', 'No', 'N.A.', 'N.V.', 'N.N.', 'N.P.']">
+                <label>
+                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
+                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                </label>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Tabella per Trasporto -->
+<table *ngIf="isTrasporto" class="rating-table">
+    <thead>
+        <tr>
+            <th>Pos.</th>
+            <th>Riferimento</th>
+            <th>ACCERTAMENTO DEI REQUISITI GENERALI: TRASPORTO</th>
+            <th *ngFor="let option of [1, 2, 3, 4, 5, 6]">{{ option }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let question of questionsTrasporto; let i = index">
+            <td>{{ question.id }}</td>
+            
+            <!-- Verifica se dovresti visualizzare questa cella -->
+            <td *ngIf="shouldDisplayRiferimentoCell(i, questionsTrasporto)" [attr.rowspan]="riferimentoRowSpan[question.riferimento]">
+              {{ question.riferimento }}
+            </td>
+            
+            <td>{{ question.requisiti }}</td>
+            <td *ngFor="let option of [1, 2, 3, 4, 5, 6]">
+                <label>
+                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
+                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                </label>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div style="align-self: center;" *ngIf="choosen">
+<button style="background-color: rgb(151, 236, 236);" routerLink="/">Indietro</button>
+<button (click)="submitRatings()">Invia</button>
+</div>
+</div>
