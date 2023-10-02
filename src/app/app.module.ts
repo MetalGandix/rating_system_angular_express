@@ -7,6 +7,7 @@ import { ViewRatingsComponent } from './view-ratings/view-ratings.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     BrowserModule
   ],
   providers: [],

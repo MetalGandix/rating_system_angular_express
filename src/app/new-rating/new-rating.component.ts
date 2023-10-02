@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RatingService } from '../rating.service';
 
 @Component({
   selector: 'app-new-rating',
@@ -50,7 +51,7 @@ export class NewRatingComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(private ratingService: RatingService) { }
 
   ngOnInit() {
     this.calculateRowSpans(this.questionsTrasporto);
@@ -99,14 +100,19 @@ export class NewRatingComponent implements OnInit {
   }
 
   submitRatings() {
-    // Qui puoi gestire l'invio delle risposte
-    if (this.isCarne) {
-      console.log(this.questionsCarne);
-    } else if (this.isLatte) {
-      console.log(this.questionsLatte);
-    } else if (this.isTrasporto) {
-      console.log(this.questionsTrasporto);
-    }
+    const ratings = {
+      category: 'Carne',   // oppure 'Latte' o 'Trasporto' in base a quale è selezionato
+      questions: this.questionsCarne  // usa l'array appropriato in base alla categoria selezionata
+    };
+
+    this.ratingService.saveRatings(ratings).subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
   
 }
