@@ -1,1 +1,17 @@
-<p>view-ratings works!</p>
+<table *ngIf="ratings.length">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Risposta</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rating of ratings">
+        <td>{{ rating.id }}</td>
+        <td>{{ rating.risposta }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <p *ngIf="!ratings.length">Nessun rating disponibile.</p>
+  

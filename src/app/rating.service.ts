@@ -14,4 +14,13 @@ export class RatingService {
   saveRatings(ratings: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/saveRating`, ratings);
   }
+
+  getAllRatings(): Observable<any> {
+    return this.http.get('http://localhost:5000/getAllRatings');
+  }
+
+  getAllRatingsResults(): Observable<any> {
+    return this.http.get('http://localhost:5000/getRatingResults');
+  }
+  
 }

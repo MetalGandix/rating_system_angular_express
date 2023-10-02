@@ -13,7 +13,7 @@ export class NewRatingComponent implements OnInit {
   isLatte: boolean = false;
   choosen: boolean = false;
 
-  riferimentoRowSpan: {[key: string]: number} = {};
+  riferimentoRowSpan: { [key: string]: number } = {};
 
   questionsCarne: RatingQuestion[] = [
     // Qui puoi inserire le domande specifiche per la carne
@@ -60,7 +60,7 @@ export class NewRatingComponent implements OnInit {
   calculateRowSpans(questions: RatingQuestion[]) {
     let currentRiferimento = '';
     let count = 0;
-  
+
     questions.forEach((question, index) => {
       if (currentRiferimento !== question.riferimento) {
         if (count > 0) {
@@ -71,7 +71,7 @@ export class NewRatingComponent implements OnInit {
       } else {
         count++;
       }
-  
+
       // Handle the last group
       if (index === questions.length - 1) {
         this.riferimentoRowSpan[currentRiferimento] = count;
@@ -100,21 +100,35 @@ export class NewRatingComponent implements OnInit {
   }
 
   submitRatings() {
-    const ratings = {
-      category: 'Carne',   // oppure 'Latte' o 'Trasporto' in base a quale è selezionato
-      questions: this.questionsCarne  // usa l'array appropriato in base alla categoria selezionata
-    };
+    let selectedQuestions: RatingQuestion[] = [];
 
-    this.ratingService.saveRatings(ratings).subscribe(
-      response => {
-        console.log(response);
-      },
-      error => {
-        console.log(error);
-      }
-    );
-  }
-  
+    if (this.isCarne) {
+        selectedQuestions = this.questionsCarne;
+    } else if (this.isLatte) {
+        selectedQuestions = this.questionsLatte;
+    } else if (this.isTrasporto) {
+        selectedQuestions = this.questionsTrasporto;
+    }
+
+    // Estrai solo id e risposta per ogni domanda
+    const ratingsToSend = selectedQuestions.map(question => {
+        return {
+            id: question.id,
+            risposta: question.risposta
+        };
+    });
+
+    console.log(ratingsToSend);  // Questo ti mostrerà una lista di oggetti con solo id e risposta
+
+    this.ratingService.saveRatings(ratingsToSend).subscribe({
+        next: response => {
+            console.log(response);
+        },
+        error: error => {
+            console.log(error);
+        }
+    });
+}
 }
 
 export interface RatingQuestion {
