@@ -8,13 +8,15 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { InsertRatingComponent } from './insert-rating/insert-rating.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewRatingComponent,
     ViewRatingsComponent,
-    NavigationComponent
+    NavigationComponent,
+    InsertRatingComponent
   ],
   imports: [
     AppRoutingModule,

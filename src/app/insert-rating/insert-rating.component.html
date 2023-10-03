@@ -1,0 +1,33 @@
+<div>
+
+    <!-- Tabella per Trasporto -->
+    <table class="rating-table">
+        <thead>
+            <tr>
+                <th>CAP. 1 - CARATTERISTICHE STRUTTURE ATTIVITA PERMANENTI</th>
+                <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let question of questions; let i = index">
+                
+                <!-- Verifica se dovresti visualizzare questa cella -->
+                <td *ngIf="shouldDisplayRiferimentoCell(i, questions)" [attr.rowspan]="riferimentoRowSpan[question.descrizione]">
+                  {{ question.descrizione }}
+                </td>
+                <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                    <label>
+                        <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
+                            [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                    </label>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div style="align-self: center;">
+    <button style="background-color: rgb(151, 236, 236);" routerLink="/">Indietro</button>
+    <button (click)="submitRatings()">Invia</button>
+    </div>
+    </div>
+    
