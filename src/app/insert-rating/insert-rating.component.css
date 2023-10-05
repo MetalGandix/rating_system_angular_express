@@ -1,5 +1,4 @@
 .rating-table {
-    width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
   }
@@ -92,3 +91,40 @@
   height: auto;  /* ripristina l'altezza normale del contenitore */
   align-items: flex-start;  /* allinea i contenuti all'inizio */
 }
+
+.form-container {
+  padding: 15px;
+  border: 1px solid #dcdcdc;
+  margin-bottom: 15px;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+}
+
+.input-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.input-table td {
+  padding: 10px;
+  border: 1px solid #dcdcdc;
+}
+
+.input-table input[type="text"], .input-table input[type="date"] {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.rating-table td:nth-child(1), .rating-table th:nth-child(1) {
+  width: 20%; /* O un altro valore fisso, se lo preferisci */
+}
+.rating-table td:nth-child(2), .rating-table th:nth-child(2) {
+  width: 20%;
+}
+.rating-title {
+  text-align: center;
+  font-size: 24px; /* o qualsiasi altro valore che preferisci per la dimensione del font */
+  margin-top: 20px; /* aggiunge un po' di spazio sopra il titolo */
+  margin-bottom: 20px; /* aggiunge un po' di spazio sotto il titolo */
+}
+

@@ -1,18 +1,42 @@
+<h1 class="rating-title">Inserisci un rating</h1>
 <div>
-
-    <!-- Tabella per Trasporto -->
+    <div class="form-container">
+        <table class="input-table">
+          <tbody>
+            <tr>
+              <td>N° S.C.U./Verbale:</td>
+              <td><input type="text" [(ngModel)]="verbale"></td>
+            </tr>
+            <tr>
+              <td>Data:</td>
+              <td><input type="date" [(ngModel)]="data"></td>
+            </tr>
+            <tr>
+              <td>Operatore/i:</td>
+              <td><input type="text" [(ngModel)]="operatore"></td>
+            </tr>
+            <tr>
+              <td>Ditta:</td>
+              <td><input type="text" [(ngModel)]="ditta"></td>
+            </tr>
+            <tr>
+              <td>Tipologia attività:</td>
+              <td><input type="text" [(ngModel)]="tipologiaAttivita"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
     <table class="rating-table">
         <thead>
             <tr>
-                <th>CAP. 1 - CARATTERISTICHE STRUTTURE ATTIVITA PERMANENTI</th>
+                <th>CAP. I - CARATTERISTICHE STRUTTURE ATTIVITA PERMANENTI</th>
                 <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let question of questions; let i = index">
-                
-                <!-- Verifica se dovresti visualizzare questa cella -->
-                <td *ngIf="shouldDisplayRiferimentoCell(i, questions)" [attr.rowspan]="riferimentoRowSpan[question.descrizione]">
+            <tr *ngFor="let question of questionsCAP1; let i = index">
+                <td >
                   {{ question.descrizione }}
                 </td>
                 <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
@@ -24,6 +48,248 @@
             </tr>
         </tbody>
     </table>
+
+        <table class="rating-table">
+            <thead>
+                <tr>
+                    <th>CAP. II – CARATTERISTICHE LOCALI ATTIVITÀ PERMANENTI</th>
+                    <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let question of questionsCAP2; let i = index">
+                    <td >
+                      {{ question.descrizione }}
+                    </td>
+                    <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                        <label>
+                            <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
+                                [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                        </label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+                <table class="rating-table">
+                    <thead>
+                        <tr>
+                            <th>CAP. V – CARATTERISTICHE LOCALI ATTIVITÀ PERMANENTI</th>
+                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let question of questionsCAP5; let i = index">
+                            <td >
+                              {{ question.descrizione }}
+                            </td>
+                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                                <label>
+                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
+                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="rating-table">
+                    <thead>
+                        <tr>
+                            <th>CAP. VI – GESTIONE RIFIUTI</th>
+                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let question of questionsCAP6; let i = index">
+                            <td >
+                              {{ question.descrizione }}
+                            </td>
+                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                                <label>
+                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
+                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="rating-table">
+                    <thead>
+                        <tr>
+                            <th>CAP. VII – RIFORNIMENTO IDRICO</th>
+                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let question of questionsCAP7; let i = index">
+                            <td >
+                              {{ question.descrizione }}
+                            </td>
+                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                                <label>
+                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
+                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="rating-table">
+                    <thead>
+                        <tr>
+                            <th>CAP. VIII – IGIENE PERSONALE</th>
+                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let question of questionsCAP8; let i = index">
+                            <td >
+                              {{ question.descrizione }}
+                            </td>
+                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                                <label>
+                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
+                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="rating-table">
+                    <thead>
+                        <tr>
+                            <th>CAP. IX – IGIENE PRODOTTI ALIMENTARI</th>
+                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let question of questionsCAP9; let i = index">
+                            <td >
+                              {{ question.descrizione }}
+                            </td>
+                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                                <label>
+                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
+                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="rating-table">
+                    <thead>
+                        <tr>
+                            <th>CAP. X – IMBALLAGGI</th>
+                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let question of questionsCAP10; let i = index">
+                            <td >
+                              {{ question.descrizione }}
+                            </td>
+                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                                <label>
+                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
+                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="rating-table">
+                    <thead>
+                        <tr>
+                            <th>CAP. XII – FORMAZIONE</th>
+                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let question of questionsCAP11; let i = index">
+                            <td >
+                              {{ question.descrizione }}
+                            </td>
+                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                                <label>
+                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
+                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="rating-table">
+                    <thead>
+                        <tr>
+                            <th>ETICHETTATURA DEI PRODOTTI ALIMENTARI</th>
+                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let question of questionEtichettaturaProdottiAlimentari; let i = index">
+                            <td >
+                              {{ question.descrizione }}
+                            </td>
+                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                                <label>
+                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
+                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="rating-table">
+                    <thead>
+                        <tr>
+                            <th>PRINCIPI DEL SISTEMA HACCP</th>
+                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let question of questionPrincipiSistemaHACCP; let i = index">
+                            <td >
+                              {{ question.descrizione }}
+                            </td>
+                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                                <label>
+                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
+                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="rating-table">
+                    <thead>
+                        <tr>
+                            <th>SISTEMA DI AUTOCONTROLLO</th>
+                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let question of questionSistemaDiAutocontrollo; let i = index">
+                            <td >
+                              {{ question.descrizione }}
+                            </td>
+                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                                <label>
+                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
+                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
     
     <div style="align-self: center;">
     <button style="background-color: rgb(151, 236, 236);" routerLink="/">Indietro</button>
