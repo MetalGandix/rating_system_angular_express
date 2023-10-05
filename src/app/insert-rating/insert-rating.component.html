@@ -31,7 +31,7 @@
         <thead>
             <tr>
                 <th>CAP. I - CARATTERISTICHE STRUTTURE ATTIVITA PERMANENTI</th>
-                <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                <th *ngFor="let option of ratingMultipliers">{{ option.testo }}</th>
             </tr>
         </thead>
         <tbody>
@@ -39,10 +39,10 @@
                 <td >
                   {{ question.descrizione }}
                 </td>
-                <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                <td *ngFor="let option of ratingMultipliers">
                     <label>
-                        <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
-                            [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                        <input type="radio" name="question-{{ question.id }}" [value]="option"
+                                   [(ngModel)]="question.risposta">
                     </label>
                 </td>
             </tr>
@@ -53,7 +53,7 @@
             <thead>
                 <tr>
                     <th>CAP. II – CARATTERISTICHE LOCALI ATTIVITÀ PERMANENTI</th>
-                    <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                    <th *ngFor="let option of ratingMultipliers">{{ option.testo }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,43 +61,45 @@
                     <td >
                       {{ question.descrizione }}
                     </td>
-                    <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                    <td *ngFor="let option of ratingMultipliers">
                         <label>
-                            <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
-                                [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                            <input type="radio" name="question-{{ question.id }}" [value]="option"
+                                   [(ngModel)]="question.risposta">
                         </label>
                     </td>
                 </tr>
             </tbody>
         </table>
 
-                <table class="rating-table">
-                    <thead>
-                        <tr>
-                            <th>CAP. V – CARATTERISTICHE LOCALI ATTIVITÀ PERMANENTI</th>
-                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let question of questionsCAP5; let i = index">
-                            <td >
-                              {{ question.descrizione }}
-                            </td>
-                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
-                                <label>
-                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
-                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
-                                </label>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <table class="rating-table">
+            <thead>
+                <tr>
+                    <th>CAP. V – CARATTERISTICHE LOCALI ATTIVITÀ PERMANENTI</th>
+                    <th *ngFor="let option of ratingMultipliers">{{ option.testo }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let question of questionsCAP5; let i = index">
+                    <td>
+                        {{ question.descrizione }}
+                    </td>
+                    <td *ngFor="let option of ratingMultipliers">
+                        <label>
+                            <input type="radio" name="question-{{ question.id }}" [value]="option"
+                                   [(ngModel)]="question.risposta">
+                        </label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        
 
                 <table class="rating-table">
                     <thead>
                         <tr>
                             <th>CAP. VI – GESTIONE RIFIUTI</th>
-                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                           <th *ngFor="let option of ratingMultipliers">{{ option.testo }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -105,10 +107,10 @@
                             <td >
                               {{ question.descrizione }}
                             </td>
-                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                            <td *ngFor="let option of ratingMultipliers">
                                 <label>
-                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
-                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                                    <input type="radio" name="question-{{ question.id }}" [value]="option"
+                                   [(ngModel)]="question.risposta">
                                 </label>
                             </td>
                         </tr>
@@ -119,29 +121,30 @@
                     <thead>
                         <tr>
                             <th>CAP. VII – RIFORNIMENTO IDRICO</th>
-                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                            <th *ngFor="let option of ratingMultipliers">{{ option.testo }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let question of questionsCAP7; let i = index">
-                            <td >
-                              {{ question.descrizione }}
+                            <td>
+                                {{ question.descrizione }}
                             </td>
-                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                            <td *ngFor="let option of ratingMultipliers; let j = index">
                                 <label>
-                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
-                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                                    <input type="radio" name="question-{{ question.id }}-option-{{ j }}" [value]="option"
+                                           [(ngModel)]="question.risposta">
                                 </label>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                
 
                 <table class="rating-table">
                     <thead>
                         <tr>
                             <th>CAP. VIII – IGIENE PERSONALE</th>
-                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                           <th *ngFor="let option of ratingMultipliers">{{ option.testo }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -149,10 +152,10 @@
                             <td >
                               {{ question.descrizione }}
                             </td>
-                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                            <td *ngFor="let option of ratingMultipliers">
                                 <label>
-                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
-                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                                    <input type="radio" name="question-{{ question.id }}" [value]="option"
+                                   [(ngModel)]="question.risposta">
                                 </label>
                             </td>
                         </tr>
@@ -163,7 +166,7 @@
                     <thead>
                         <tr>
                             <th>CAP. IX – IGIENE PRODOTTI ALIMENTARI</th>
-                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                           <th *ngFor="let option of ratingMultipliers">{{ option.testo }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -171,10 +174,10 @@
                             <td >
                               {{ question.descrizione }}
                             </td>
-                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                            <td *ngFor="let option of ratingMultipliers">
                                 <label>
-                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
-                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                                    <input type="radio" name="question-{{ question.id }}" [value]="option"
+                                   [(ngModel)]="question.risposta">
                                 </label>
                             </td>
                         </tr>
@@ -185,7 +188,7 @@
                     <thead>
                         <tr>
                             <th>CAP. X – IMBALLAGGI</th>
-                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                           <th *ngFor="let option of ratingMultipliers">{{ option.testo }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -193,10 +196,10 @@
                             <td >
                               {{ question.descrizione }}
                             </td>
-                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                            <td *ngFor="let option of ratingMultipliers">
                                 <label>
-                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
-                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                                    <input type="radio" name="question-{{ question.id }}" [value]="option"
+                                   [(ngModel)]="question.risposta">
                                 </label>
                             </td>
                         </tr>
@@ -207,18 +210,18 @@
                     <thead>
                         <tr>
                             <th>CAP. XII – FORMAZIONE</th>
-                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                           <th *ngFor="let option of ratingMultipliers">{{ option.testo }}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let question of questionsCAP11; let i = index">
+                        <tr *ngFor="let question of questionsCAP12; let i = index">
                             <td >
                               {{ question.descrizione }}
                             </td>
-                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                            <td *ngFor="let option of ratingMultipliers">
                                 <label>
-                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
-                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                                    <input type="radio" name="question-{{ question.id }}" [value]="option"
+                                   [(ngModel)]="question.risposta">
                                 </label>
                             </td>
                         </tr>
@@ -229,7 +232,7 @@
                     <thead>
                         <tr>
                             <th>ETICHETTATURA DEI PRODOTTI ALIMENTARI</th>
-                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                           <th *ngFor="let option of ratingMultipliers">{{ option.testo }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -237,10 +240,10 @@
                             <td >
                               {{ question.descrizione }}
                             </td>
-                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                            <td *ngFor="let option of ratingMultipliers">
                                 <label>
-                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
-                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                                    <input type="radio" name="question-{{ question.id }}" [value]="option"
+                                   [(ngModel)]="question.risposta">
                                 </label>
                             </td>
                         </tr>
@@ -251,7 +254,7 @@
                     <thead>
                         <tr>
                             <th>PRINCIPI DEL SISTEMA HACCP</th>
-                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                           <th *ngFor="let option of ratingMultipliers">{{ option.testo }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -259,10 +262,10 @@
                             <td >
                               {{ question.descrizione }}
                             </td>
-                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                            <td *ngFor="let option of ratingMultipliers">
                                 <label>
-                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
-                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                                    <input type="radio" name="question-{{ question.id }}" [value]="option"
+                                   [(ngModel)]="question.risposta">
                                 </label>
                             </td>
                         </tr>
@@ -273,7 +276,7 @@
                     <thead>
                         <tr>
                             <th>SISTEMA DI AUTOCONTROLLO</th>
-                            <th *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">{{ option }}</th>
+                           <th *ngFor="let option of ratingMultipliers">{{ option.testo }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -281,19 +284,22 @@
                             <td >
                               {{ question.descrizione }}
                             </td>
-                            <td *ngFor="let option of ['Inadeguato/N.C.', 'Scarso', 'Discreto', 'Buono', 'Ottimo']">
+                            <td *ngFor="let option of ratingMultipliers">
                                 <label>
-                                    <input type="radio" name="question-{{ question.id }}" value="{{ option }}"
-                                        [(ngModel)]="question.risposta" [checked]="question.risposta === option">
+                                    <input type="radio" name="question-{{ question.id }}" [value]="option"
+                                   [(ngModel)]="question.risposta">
                                 </label>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+
+    <button style="background-color: cadetblue;" (click)="calculatePoints()">Calcola punteggio</button>
     
     <div style="align-self: center;">
     <button style="background-color: rgb(151, 236, 236);" routerLink="/">Indietro</button>
     <button (click)="submitRatings()">Invia</button>
+    <span *ngIf="totalRatingPoints !== null">Punteggio totale: {{ totalRatingPoints }}</span>
     </div>
     </div>
     
