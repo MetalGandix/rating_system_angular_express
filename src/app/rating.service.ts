@@ -9,7 +9,7 @@ export class RatingService {
 
   private apiUrl = 'http://localhost:5000';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   saveRatings(ratings: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/saveRating`, ratings);
@@ -27,7 +27,12 @@ export class RatingService {
     const headers = new HttpHeaders().append('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     const params = new HttpParams().set('id', ratingId);
     return this.http.get(`${this.apiUrl}/downloadRatings`, { headers: headers, params: params, responseType: 'blob' });
-}
+  }
+
+  deleteRatingById(ratingId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/deleteRating/${ratingId}`);
+  }
+
 
 
 }

@@ -24,16 +24,20 @@ export class ViewRatingsComponent implements OnInit {
   constructor(private ratingService: RatingService) { }
 
   ngOnInit(): void {
+    this.getRatings();
+  }
+
+  getRatings() {
     this.ratingService.getAllRatings().subscribe({
       next: data => {
         if (data && data.data) {
           this.ratings = data.data;
-  
+
           // Itera attraverso ogni elemento di this.ratings
           this.ratings.forEach(x => {
             // Analizza l'elemento corrente come JSON
             let currentRating = JSON.parse(x.data);
-  
+
             // Crea un nuovo oggetto di tipo Rating utilizzando i valori estratti da currentRating
             let newRating: Rating = {
               verbale: currentRating?.verbale, // Usa l'operatore || per fornire un valore di default se verbale è undefined
@@ -45,10 +49,10 @@ export class ViewRatingsComponent implements OnInit {
               questions: currentRating?.questions,
               totalRating: currentRating.totalRating // Assumendo che tu non stia ottenendo il totalRating dal tuo servizio, ma lo stia calcolando o impostando in seguito
             };
-  
+
             // Aggiungi il nuovo oggetto Rating all'array newRatings
             this.newRatings?.push(newRating);
-  
+
             console.log(this.newRatings)
           });
         }
@@ -56,11 +60,28 @@ export class ViewRatingsComponent implements OnInit {
       error: error => console.error(error)
     });
   }
-  
+
 
   showRatingDetails(rating: any): void {
     this.selectedRating = this.selectedRating === rating ? null : rating;
   }
+
+  deleteRating(rating: Rating): void {
+    this.ratingService.deleteRatingById(Number(rating.id)).subscribe({
+      next: response => {
+        console.log(response.message);
+        // Remove the rating from the ratings array
+        this.ratings = this.ratings.filter(r => r.id !== rating.id);
+        // Remove the rating from the newRatings array
+        if (this.newRatings) {
+          this.newRatings = this.newRatings.filter(r => r.id !== rating.id);
+        }
+      },
+      error: err => {
+        console.error("Errore nell'eliminazione del rating:", err);
+      }
+    });
+}
 
   downloadExcel(ratingId: string): void {
     this.ratingService.downloadRatingExcel(ratingId).subscribe(data => {
