@@ -506,11 +506,11 @@ export class InsertRatingComponent {
   ];
 
   getColorForRating(rating: number): string {
-    if (rating >= 33.4 && rating <= 66.8) {
+    if (rating >= 33.4 && rating < 100.2) {
       return 'red';
     }
-    if (rating >= 100.2 && rating <= 133.6) {
-      return 'lightcoral'; // Un'opzione per arancione chiaro
+    if (rating >= 100.2 && rating < 133.6) {
+      return 'orange'; // Un'opzione per arancione chiaro
     }
     if (rating >= 133.6 && rating <= 167) {
       return 'green';

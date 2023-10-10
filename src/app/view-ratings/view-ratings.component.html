@@ -3,20 +3,40 @@
     <tr>
       <th>ID</th>
       <th>Data</th>
-      <th>Risposta</th>
-      <th>Azione</th> <!-- Colonna aggiunta per i bottoni -->
+      <th>Azione</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let rating of ratings">
+    <tr *ngFor="let rating of newRatings">
       <td>{{ rating.id }}</td>
       <td>{{ rating.timestamp }}</td>
-      <td>{{ rating.data }}</td>
       <td>
           <button (click)="downloadExcel(rating.id)">Scarica Excel</button>
-      </td> <!-- Bottoni aggiunti in questa colonna -->
+          <button (click)="showRatingDetails(rating)">Premi per vedere il rating</button>
+      </td>
     </tr>
   </tbody>
 </table>
+
+<div *ngIf="selectedRating">
+  <h2>{{ selectedRating.verbale }}</h2>
+  <p><strong>Operatore:</strong> {{ selectedRating.operatore }}</p>
+  <p><strong>Ditta:</strong> {{ selectedRating.ditta }}</p>
+  <p><strong>Tipologia Attività:</strong> {{ selectedRating.tipologiaAttivita }}</p>
+
+  <h3>Domande</h3>
+  <ul>
+    <li *ngFor="let question of selectedRating.questions">
+      {{ question.id }}. {{ question.descrizione }}
+      <ul>
+        <li><strong>Risposta:</strong> {{ question.risposta.testo }}</li>
+        <li><strong>Peso:</strong> {{ question.peso }}</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p><strong>Rating Totale:</strong> {{ selectedRating.totalRating }}</p>
+  <button (click)="selectedRating = null">Chiudi dettagli</button> <!-- Bottono per chiudere i dettagli -->
+</div>
 
 <p *ngIf="!ratings.length">Nessun rating disponibile.</p>
