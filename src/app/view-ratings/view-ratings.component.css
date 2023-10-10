@@ -1,42 +1,73 @@
-/* Contenitore della tabella */
+/* Stili base per la tabella */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Intestazioni della tabella */
-  thead th {
-    background-color: #f5f5f5;
-    color: #333;
-    padding: 10px 15px;
-    border: 1px solid #ddd;
-    text-align: left;
-  }
-  
-  /* Righe della tabella */
-  tbody tr {
-    border: 1px solid #ddd;
-    transition: background-color 0.2s;
-  }
-  
-  /* Le celle della tabella */
-  tbody td {
-    padding: 10px 15px;
-    border-top: 1px solid #ddd;
-  }
-  
-  /* Effetto hover sulle righe */
-  tbody tr:hover {
-    background-color: #f5f5f5;
-  }
-  
-  /* Testo quando non ci sono rating */
-  p {
-    font-size: 16px;
-    font-family: Arial, sans-serif;
-    color: #555;
-    margin-top: 20px;
-  }
-  
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+}
+
+th, td {
+  padding: 10px 20px;
+  text-align: left;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+button {
+  padding: 5px 15px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Stili per il dettaglio del rating */
+div {
+  padding: 20px;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+h2, h3, p {
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+strong {
+  color: #4CAF50;
+}
