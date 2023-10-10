@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class RatingService {
 
-  private apiUrl = 'http://localhost:5000';
+  private apiUrl = 'https://rating-system-software.glitch.me';
 
   constructor(private http: HttpClient) { }
 
