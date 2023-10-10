@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { InsertRatingComponent } from './insert-rating/insert-rating.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { InsertRatingComponent } from './insert-rating/insert-rating.component';
     NewRatingComponent,
     ViewRatingsComponent,
     NavigationComponent,
-    InsertRatingComponent
+    InsertRatingComponent,
+    LoginComponent
   ],
   imports: [
     AppRoutingModule,
