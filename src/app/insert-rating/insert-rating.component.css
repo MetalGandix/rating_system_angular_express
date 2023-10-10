@@ -128,3 +128,10 @@
   margin-bottom: 20px; /* aggiunge un po' di spazio sotto il titolo */
 }
 
+.legend {
+  margin-left: 20px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+

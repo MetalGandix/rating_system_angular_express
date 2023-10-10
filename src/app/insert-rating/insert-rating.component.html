@@ -1,5 +1,5 @@
 <h1 class="rating-title">Inserisci un rating</h1>
-<div>
+<div style="margin-bottom: 30px;">
     <div class="form-container">
         <table class="input-table">
           <tbody>
@@ -299,7 +299,12 @@
     <div style="align-self: center;">
     <button style="background-color: rgb(151, 236, 236);" routerLink="/">Indietro</button>
     <button (click)="submitRatings()">Invia</button>
-    <span *ngIf="totalRatingPoints !== null">Punteggio totale: {{ totalRatingPoints }}</span>
+    <span *ngIf="totalRatingPoints !== null" [style.color]="getColorForRating(totalRatingPoints)">Punteggio totale: {{ totalRatingPoints }}</span>
+    <div class="legend">
+        <span style="color: green;">●</span> Condizione ottima<br>
+        <span style="color: lightcoral;">●</span> Condizione media<br>
+        <span style="color: red;">●</span> Condizione pessima
+      </div>
     </div>
     </div>
     

@@ -342,68 +342,69 @@ export class InsertRatingComponent {
     let totalPesoCapSistemaDiAutocontrollo: number = 0
 
     this.questionsCAP1.forEach(x => {
-      total += x.peso * (x.risposta?.moltiplicatore ?? 1);
-      totalPesoCap1 += x.peso * (x.risposta?.moltiplicatore ?? 1);
+      total += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
+      totalPesoCap1 += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
     });
     console.log("Peso CAP1", totalPesoCap1)
     this.questionsCAP2.forEach(x => {
-      total += x.peso * (x.risposta?.moltiplicatore ?? 1);
-      totalPesoCap2 += x.peso * (x.risposta?.moltiplicatore ?? 1);
+      total += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
+      totalPesoCap2 += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
     });
     console.log("Peso CAP2", totalPesoCap2)
     this.questionsCAP5.forEach(x => {
-      total += x.peso * (x.risposta?.moltiplicatore ?? 1);
-      totalPesoCap5 += x.peso * (x.risposta?.moltiplicatore ?? 1);
+      total += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
+      totalPesoCap5 += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
     });
     console.log("Peso CAP5", totalPesoCap5)
     this.questionsCAP6.forEach(x => {
-      total += x.peso * (x.risposta?.moltiplicatore ?? 1);
-      totalPesoCap6 += x.peso * (x.risposta?.moltiplicatore ?? 1);
+      total += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
+      totalPesoCap6 += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
     });
     console.log("Peso CAP6", totalPesoCap6)
     this.questionsCAP7.forEach(x => {
-      total += x.peso * (x.risposta?.moltiplicatore ?? 1);
-      totalPesoCap7 += x.peso * (x.risposta?.moltiplicatore ?? 1);
+      total += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
+      totalPesoCap7 += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
     });
     console.log("Peso CAP7", totalPesoCap7)
     this.questionsCAP8.forEach(x => {
-      total += x.peso * (x.risposta?.moltiplicatore ?? 1);
-      totalPesoCap8 += x.peso * (x.risposta?.moltiplicatore ?? 1);
+      total += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
+      totalPesoCap8 += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
     });
     console.log("Peso CAP8", totalPesoCap8)
     this.questionsCAP9.forEach(x => {
-      total += x.peso * (x.risposta?.moltiplicatore ?? 1);
-      totalPesoCap9 += x.peso * (x.risposta?.moltiplicatore ?? 1);
+      total += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
+      totalPesoCap9 += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
     });
     console.log("Peso CAP9", totalPesoCap9)
     this.questionsCAP10.forEach(x => {
-      total += x.peso * (x.risposta?.moltiplicatore ?? 1);
-      totalPesoCap10 += x.peso * (x.risposta?.moltiplicatore ?? 1);
+      total += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
+      totalPesoCap10 += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
     });
     console.log("Peso CAP10", totalPesoCap10)
     this.questionsCAP12.forEach(x => {
-      total += x.peso * (x.risposta?.moltiplicatore ?? 1);
-      totalPesoCap12 += x.peso * (x.risposta?.moltiplicatore ?? 1);
+      total += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
+      totalPesoCap12 += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
     });
     console.log("Peso CAP12", totalPesoCap12)
     this.questionEtichettaturaProdottiAlimentari.forEach(x => {
-      total += x.peso * (x.risposta?.moltiplicatore ?? 1);
-      totalPesoCapEtichettaturaProdottiAlimentari += x.peso * (x.risposta?.moltiplicatore ?? 1);
+      total += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
+      totalPesoCapEtichettaturaProdottiAlimentari += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
     });
     console.log("Peso CAPEtichettaturaProdottiAlimentari", totalPesoCapEtichettaturaProdottiAlimentari)
     this.questionPrincipiSistemaHACCP.forEach(x => {
-      total += x.peso * (x.risposta?.moltiplicatore ?? 1);
-      totalPesoCapPrincipiSistemaHACCP += x.peso * (x.risposta?.moltiplicatore ?? 1);
+      total += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
+      totalPesoCapPrincipiSistemaHACCP += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
     });
     console.log("Peso CAPHACCP", totalPesoCapPrincipiSistemaHACCP)
     this.questionSistemaDiAutocontrollo.forEach(x => {
-      total += x.peso * (x.risposta?.moltiplicatore ?? 1);
-      totalPesoCapSistemaDiAutocontrollo += x.peso * (x.risposta?.moltiplicatore ?? 1);
+      total += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
+      totalPesoCapSistemaDiAutocontrollo += x.peso * (x.risposta?.moltiplicatore ?? 0.1);
     })
     console.log("Peso CAPSistemaAutocontrollo", totalPesoCapSistemaDiAutocontrollo)
 
-    this.totalRatingPoints = total;
-    return total;
+    this.totalRatingPoints = Math.round(total * 10) / 10;;
+    
+    return this.totalRatingPoints;
   }
 
   submitRatings() {
@@ -484,25 +485,40 @@ export class InsertRatingComponent {
   ratingMultipliers: RatingMultiplier[] = [
     {
       testo: 'Inadeguato/N.C.',
-      moltiplicatore: 1,
+      moltiplicatore: 0.1,
     },
     {
       testo: 'Scarso',
-      moltiplicatore: 2,
+      moltiplicatore: 0.2,
     },
     {
       testo: 'Discreto',
-      moltiplicatore: 3,
+      moltiplicatore: 0.3,
     },
     {
       testo: 'Buono',
-      moltiplicatore: 4,
+      moltiplicatore: 0.4,
     },
     {
       testo: 'Ottimo',
-      moltiplicatore: 5,
+      moltiplicatore: 0.5,
     }
   ];
+
+  getColorForRating(rating: number): string {
+    if (rating >= 33.4 && rating <= 66.8) {
+      return 'red';
+    }
+    if (rating >= 100.2 && rating <= 133.6) {
+      return 'lightcoral'; // Un'opzione per arancione chiaro
+    }
+    if (rating >= 133.6 && rating <= 167) {
+      return 'green';
+    }
+    return 'black'; // Colore di default se nessuna condizione è soddisfatta
+  }
+
+  //33.4 66.8 100.2 133.6 167
 
 }
 
