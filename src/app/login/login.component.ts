@@ -13,20 +13,24 @@ export class LoginComponent {
   password?: string;
   errorMessage?: string;
 
-  private accounts: { [key: string]: string } = {
-    'caterina': 'caterina_password',
-    'user2': 'password2',
-  };
-  
-
   constructor(private authService: AuthService, private router: Router) {}
 
   login() {
-    if (this.username && this.password && this.accounts[this.username] === this.password) {
-      this.authService.login();
-      this.router.navigate(['/']); // Reindirizza alla pagina principale o alla pagina desiderata dopo il login
+    if (this.username && this.password) {
+      this.authService.loginAuth(this.username, this.password).subscribe(
+        response => {
+          // Questa funzione viene chiamata quando la richiesta ha esito positivo
+          this.authService.login();
+          this.router.navigate(['/']);
+        },
+        error => {
+          // Questa funzione viene chiamata quando la richiesta ha esito negativo
+          this.errorMessage = 'Credenziali non valide!';
+        },
+        // Non hai bisogno della terza funzione in questo contesto
+      );
     } else {
-      this.errorMessage = 'Credenziali non valide!';
+      this.errorMessage = 'Inserisci username e password!';
     }
   }
   
