@@ -1,4 +1,11 @@
 /* Stili base per la tabella */
+.rating-circle {
+  width: 5px;  
+  height: 5px;  
+  border-radius: 50%;  /* imposta border-radius al 50% per avere un cerchio perfetto */
+  display: inline-block;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -48,7 +55,7 @@ button:hover {
 
 /* Stili per il dettaglio del rating */
 div {
-  padding: 20px;
+  padding: 10px;
   border: 1px solid #dddddd;
   border-radius: 8px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);

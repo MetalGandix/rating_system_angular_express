@@ -5,6 +5,7 @@
       <th>ID</th>
       <th>Data</th>
       <th>Azione</th>
+      <th>Rating</th> <!-- Aggiungi una colonna per il rating -->
     </tr>
   </thead>
   <tbody>
@@ -15,6 +16,10 @@
           <button (click)="downloadExcel(rating.id)">Scarica Excel</button>
           <button (click)="showRatingDetails(rating)">Premi per vedere il rating</button>
           <button (click)="deleteRating(rating)">Elimina</button>
+      </td>
+      <td>
+        <!-- Cerchietto colorato per il rating -->
+        <div class="rating-circle" [style.background-color]="getColorForRating(rating.totalRating)"></div>
       </td>
     </tr>
   </tbody>
@@ -38,7 +43,7 @@
   </ul>
 
   <p><strong>Rating Totale:</strong> {{ selectedRating.totalRating }}</p>
-  <button (click)="selectedRating = null">Chiudi dettagli</button> <!-- Bottono per chiudere i dettagli -->
+  <button (click)="selectedRating = null">Chiudi dettagli</button> <!-- Bottone per chiudere i dettagli -->
 </div>
 
 <p *ngIf="!ratings.length">Nessun rating disponibile.</p>

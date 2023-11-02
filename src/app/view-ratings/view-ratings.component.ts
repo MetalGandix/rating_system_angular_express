@@ -93,6 +93,19 @@ export class ViewRatingsComponent implements OnInit {
       link.click();
     });
   }
+
+   getColorForRating(rating: number): string {
+    if (rating >= 31.2 && rating < 62.4) {
+      return 'red';
+    }
+    if (rating >= 62.4 && rating < 124.8) {
+      return 'orange'; // Un'opzione per arancione chiaro
+    }
+    if (rating >= 124.8) {
+      return 'green';
+    }
+    return 'black'; // Colore di default se nessuna condizione è soddisfatta
+  }
 }
 
 export interface Rating {

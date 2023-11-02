@@ -18,6 +18,7 @@ export class InsertRatingComponent {
   ditta: string = '';
   tipologiaAttivita: string = '';
   totalRatingPoints: number = 0;
+  isFormValid = false;
 
   riferimentoRowSpan: { [key: string]: number } = {};
 
@@ -44,26 +45,21 @@ export class InsertRatingComponent {
     },
     {
       id: 5,
-      descrizione: 'Areazione naturale e/o artificiale dei locali',
-      peso: 6
-    },
-    {
-      id: 6,
       descrizione: 'Sistema di aerazione naturale o meccanico negli impianti sanitari',
       peso: 6
     },
     {
-      id: 7,
+      id: 6,
       descrizione: 'Illuminazione dei locali',
       peso: 5
     },
     {
-      id: 8,
+      id: 7,
       descrizione: 'Installazioni adeguate adibite a spogliatoio per il personale',
       peso: 6
     },
     {
-      id: 9,
+      id: 8,
       descrizione: 'Prodotti per la pulizia e sostanze pericolose/non commestibili detenuti in modo confinato',
       peso: 3
     }
@@ -71,32 +67,32 @@ export class InsertRatingComponent {
 
   questionsCAP2: RatingQuestion[] = [
     {
-      id: 10,
+      id: 9,
       descrizione: 'Pavimenti in materiale resistente, facile da pulire e mantenuti in buone condizioni di manutenzione e pulizia',
       peso: 8
     },
     {
-      id: 11,
+      id: 10,
       descrizione: "Pareti in materiale facile da pulire, fino ad un'altezza adeguata e mantenuti in buone condizioni di manutenzione e pulizia",
       peso: 8
     },
     {
-      id: 12,
+      id: 11,
       descrizione: "Soffitti in materiale facile da pulire, che riduce l'accumulo di sporcizia e formazione di condensa e mantenuti in buone condizioni di manutenzione e pulizia",
       peso: 8
     },
     {
-      id: 13,
+      id: 12,
       descrizione: "Finestre costruite in modo da evitare l’accumulo di sporcizia e provviste di reti anti-insetti (se apribili all'esterno)",
       peso: 8
     },
     {
-      id: 14,
+      id: 13,
       descrizione: "Porte costruite in modo da evitare l’accumulo di sporcizia e provviste di reti anti-insetti (se apribili all'esterno)",
       peso: 8
     },
     {
-      id: 15,
+      id: 14,
       descrizione: 'Superfici destinate alla manipolazione di alimenti in materiale resistente, facile da pulire e mantenute in buone condizioni di manutenzione e pulizia',
       peso: 8
     }
@@ -104,12 +100,12 @@ export class InsertRatingComponent {
 
   questionsCAP5: RatingQuestion[] = [
     {
-      id: 16,
+      id: 15,
       descrizione: 'Attrezzature mantenute in buone condizioni di pulizia e manutenzione e installate in modo da consentire un’adeguata pulizia',
       peso: 10
     },
     {
-      id: 17,
+      id: 16,
       descrizione: "Attrezzature dispongono di dispositivi di controllo (frigoriferi, congelatori, abbattitori, ecc)",
       peso: 9
     }
@@ -117,17 +113,17 @@ export class InsertRatingComponent {
 
   questionsCAP6: RatingQuestion[] = [
     {
-      id: 18,
+      id: 17,
       descrizione: 'Rifiuti, sottoprodotti e scarti sono rimossi al più presto dai locali per evitare gli accumoli',
       peso: 8
     },
     {
-      id: 19,
+      id: 18,
       descrizione: "Contenitori dei rifiuti chiudibili, in materiale facile da pulire e mantenuti in buone condizioni di pulizia",
       peso: 8
     },
     {
-      id: 20,
+      id: 19,
       descrizione: "Disposizioni per il deposito e la rimozione di rifiuti, sottoprodotti e scarti",
       peso: 6
     }
@@ -135,7 +131,7 @@ export class InsertRatingComponent {
 
   questionsCAP7: RatingQuestion[] = [
     {
-      id: 21,
+      id: 20,
       descrizione: 'Disponibilità sufficiente di acqua potabile',
       peso: 10
     }
@@ -143,7 +139,7 @@ export class InsertRatingComponent {
 
   questionsCAP8: RatingQuestion[] = [
     {
-      id: 22,
+      id: 21,
       descrizione: 'Ogni addetto mantiene un comportamento idoneo all’attività svolta e indossa indumenti adeguati e puliti',
       peso: 10
     }
@@ -151,17 +147,17 @@ export class InsertRatingComponent {
 
   questionsCAP9: RatingQuestion[] = [
     {
-      id: 23,
+      id: 22,
       descrizione: 'Materie prime idonee e conservare in modo da evitare deterioramento e/o contaminazione',
       peso: 10
     },
     {
-      id: 24,
+      id: 23,
       descrizione: 'Alimenti protetti da qualsiasi forma di contaminazione, in tutte le fasi di lavorazione',
       peso: 10
     },
     {
-      id: 25,
+      id: 24,
       descrizione: 'Materie prime, semilavorati e prodotti finiti deperibili conservarti a temperatura controllata e nel rispetto della catena del freddo (frigorifero, congelatore, ghiaccio)',
       peso: 10
     }
@@ -169,7 +165,7 @@ export class InsertRatingComponent {
 
   questionsCAP10: RatingQuestion[] = [
     {
-      id: 26,
+      id: 25,
       descrizione: 'Materiali di imballaggio (M.O.C.A.) adeguatamente immagazzinati in modo da evitare contaminazioni',
       peso: 5
     }
@@ -177,7 +173,7 @@ export class InsertRatingComponent {
 
   questionsCAP12: RatingQuestion[] = [
     {
-      id: 27,
+      id: 26,
       descrizione: 'OSA e addetti alla manipolazione degli alimenti sono adeguatamente formati',
       peso: 6
     }
@@ -185,27 +181,17 @@ export class InsertRatingComponent {
 
   questionEtichettaturaProdottiAlimentari: RatingQuestion[] = [
     {
-      id: 28,
+      id: 27,
       descrizione: 'Etichettatura dei prodotti alimentari confezionati',
       peso: 8
     },
     {
-      id: 29,
+      id: 28,
       descrizione: 'Etichettatura/identificazione con cartello/registro ingredienti dei prodotti alimentari preincartati, frazionati e sfusi (compresi quelli preparati in loco) ',
       peso: 8
     },
     {
-      id: 30,
-      descrizione: 'Etichettatura/identificazione con cartello della pasta fresca allo stato sfuso',
-      peso: 8
-    },
-    {
-      id: 31,
-      descrizione: 'Etichettatura/identificazione con cartello della carne fresca e dei prodotti ittici',
-      peso: 8
-    },
-    {
-      id: 32,
+      id: 29,
       descrizione: 'Presenza di informazioni relative agli allergeni',
       peso: 7
     }
@@ -213,27 +199,27 @@ export class InsertRatingComponent {
 
   questionPrincipiSistemaHACCP: RatingQuestion[] = [
     {
-      id: 33,
+      id: 30,
       descrizione: 'Diagramma di flusso',
       peso: 4
     },
     {
-      id: 34,
+      id: 31,
       descrizione: 'Analisi dei pericoli e identificazione CCP',
       peso: 6
     },
     {
-      id: 35,
+      id: 32,
       descrizione: 'Definizione  e registrazione procedure di monitoraggio e limiti critici',
       peso: 6
     },
     {
-      id: 36,
+      id: 33,
       descrizione: 'Definizione e registrazione azioni correttive',
       peso: 6
     },
     {
-      id: 37,
+      id: 34,
       descrizione: 'Definizione procedure di verifica e referti analitici',
       peso: 6
     }
@@ -241,47 +227,47 @@ export class InsertRatingComponent {
 
   questionSistemaDiAutocontrollo: RatingQuestion[] = [
     {
-      id: 38,
+      id: 35,
       descrizione: 'Accettazione materie prime e ingredienti',
       peso: 7
     },
     {
-      id: 39,
+      id: 36,
       descrizione: 'Pulizia e disinfezione',
       peso: 7
     },
     {
-      id: 40,
+      id: 37,
       descrizione: 'Controllo animali infestanti',
       peso: 7
     },
     {
-      id: 41,
+      id: 38,
       descrizione: 'Controllo potabilità dell’acqua',
       peso: 7
     },
     {
-      id: 42,
+      id: 39,
       descrizione: 'Manutenzione strutture ed impianti',
       peso: 7
     },
     {
-      id: 43,
+      id: 40,
       descrizione: 'Gestione rifiuti',
       peso: 7
     },
     {
-      id: 44,
+      id: 41,
       descrizione: 'Formazione del personale',
       peso: 7
     },
     {
-      id: 45,
+      id: 42,
       descrizione: 'Gestione M.O.C.A.',
       peso: 7
     },
     {
-      id: 46,
+      id: 43,
       descrizione: 'Sistema di rintracciabilità',
       peso: 7
     }
@@ -326,6 +312,7 @@ export class InsertRatingComponent {
   }
 
   calculatePoints(): number{
+    console.log(this.questionsCAP1[0].risposta)
     let total = 0;
 
     let totalPesoCap1: number = 0
@@ -505,20 +492,52 @@ export class InsertRatingComponent {
     }
   ];
 
+  checkFormValidity() {
+    const extractAnswers = (questions: (RatingQuestion | string)[]) => {
+      return questions.map(q => {
+        if (typeof q === 'string') {
+          return q;
+        } else {
+          return q.risposta?.testo; // o qualsiasi altra proprietà di 'risposta' che vuoi utilizzare
+        }
+      });
+    };
+  
+    this.isFormValid = ![
+      this.verbale,
+      this.data,
+      this.operatore,
+      this.ditta,
+      this.tipologiaAttivita,
+      ...extractAnswers(this.questionsCAP1),
+      ...extractAnswers(this.questionsCAP2),
+      ...extractAnswers(this.questionsCAP5),
+      ...extractAnswers(this.questionsCAP6),
+      ...extractAnswers(this.questionsCAP7),
+      ...extractAnswers(this.questionsCAP8),
+      ...extractAnswers(this.questionsCAP9),
+      ...extractAnswers(this.questionsCAP10),
+      ...extractAnswers(this.questionsCAP12),
+      ...extractAnswers(this.questionEtichettaturaProdottiAlimentari),
+      ...extractAnswers(this.questionPrincipiSistemaHACCP),
+      ...extractAnswers(this.questionSistemaDiAutocontrollo),
+    ].some(el => el == null || el === '');
+  
+    console.log(`Il form è ${this.isFormValid ? 'valido' : 'non valido'}`);
+  }
+
   getColorForRating(rating: number): string {
-    if (rating >= 33.4 && rating < 100.2) {
+    if (rating >= 31.2 && rating < 62.4) {
       return 'red';
     }
-    if (rating >= 100.2 && rating < 133.6) {
+    if (rating >= 62.4 && rating < 124.8) {
       return 'orange'; // Un'opzione per arancione chiaro
     }
-    if (rating >= 133.6 && rating <= 167) {
+    if (rating >= 124.8) {
       return 'green';
     }
     return 'black'; // Colore di default se nessuna condizione è soddisfatta
   }
-
-  //33.4 66.8 100.2 133.6 167
 
 }
 

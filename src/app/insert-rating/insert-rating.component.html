@@ -1,3 +1,4 @@
+<form #form="ngForm" (ngSubmit)="submitRatings()">
 <h1 class="rating-title">Inserisci un rating</h1>
 <div style="margin-bottom: 30px;">
     <div class="form-container">
@@ -5,23 +6,23 @@
           <tbody>
             <tr>
               <td>N° S.C.U./Verbale:</td>
-              <td><input type="text" [(ngModel)]="verbale"></td>
+              <td><input name="verbale" type="text" [(ngModel)]="verbale" required></td>
             </tr>
             <tr>
               <td>Data:</td>
-              <td><input type="date" [(ngModel)]="data"></td>
+              <td><input name="data" type="date" [(ngModel)]="data" required></td>
             </tr>
             <tr>
               <td>Operatore/i:</td>
-              <td><input type="text" [(ngModel)]="operatore"></td>
+              <td><input name="operatore" type="text" [(ngModel)]="operatore" required></td>
             </tr>
             <tr>
               <td>Ditta:</td>
-              <td><input type="text" [(ngModel)]="ditta"></td>
+              <td><input name="ditta" type="text" [(ngModel)]="ditta" required></td>
             </tr>
             <tr>
               <td>Tipologia attività:</td>
-              <td><input type="text" [(ngModel)]="tipologiaAttivita"></td>
+              <td><input name="tipologiaAttivita" type="text" [(ngModel)]="tipologiaAttivita" required></td>
             </tr>
           </tbody>
         </table>
@@ -42,7 +43,7 @@
                 <td *ngFor="let option of ratingMultipliers">
                     <label>
                         <input type="radio" name="question-{{ question.id }}" [value]="option"
-                                   [(ngModel)]="question.risposta">
+                                   [(ngModel)]="question.risposta" required>
                     </label>
                 </td>
             </tr>
@@ -64,7 +65,7 @@
                     <td *ngFor="let option of ratingMultipliers">
                         <label>
                             <input type="radio" name="question-{{ question.id }}" [value]="option"
-                                   [(ngModel)]="question.risposta">
+                                   [(ngModel)]="question.risposta" required>
                         </label>
                     </td>
                 </tr>
@@ -86,7 +87,7 @@
                     <td *ngFor="let option of ratingMultipliers">
                         <label>
                             <input type="radio" name="question-{{ question.id }}" [value]="option"
-                                   [(ngModel)]="question.risposta">
+                                   [(ngModel)]="question.risposta" required>
                         </label>
                     </td>
                 </tr>
@@ -110,7 +111,7 @@
                             <td *ngFor="let option of ratingMultipliers">
                                 <label>
                                     <input type="radio" name="question-{{ question.id }}" [value]="option"
-                                   [(ngModel)]="question.risposta">
+                                   [(ngModel)]="question.risposta" required>
                                 </label>
                             </td>
                         </tr>
@@ -132,7 +133,7 @@
                             <td *ngFor="let option of ratingMultipliers; let j = index">
                                 <label>
                                     <input type="radio" name="question-{{ question.id }}-option-{{ j }}" [value]="option"
-                                           [(ngModel)]="question.risposta">
+                                           [(ngModel)]="question.risposta" required>
                                 </label>
                             </td>
                         </tr>
@@ -155,7 +156,7 @@
                             <td *ngFor="let option of ratingMultipliers">
                                 <label>
                                     <input type="radio" name="question-{{ question.id }}" [value]="option"
-                                   [(ngModel)]="question.risposta">
+                                   [(ngModel)]="question.risposta" required>
                                 </label>
                             </td>
                         </tr>
@@ -177,7 +178,7 @@
                             <td *ngFor="let option of ratingMultipliers">
                                 <label>
                                     <input type="radio" name="question-{{ question.id }}" [value]="option"
-                                   [(ngModel)]="question.risposta">
+                                   [(ngModel)]="question.risposta" required>
                                 </label>
                             </td>
                         </tr>
@@ -199,7 +200,7 @@
                             <td *ngFor="let option of ratingMultipliers">
                                 <label>
                                     <input type="radio" name="question-{{ question.id }}" [value]="option"
-                                   [(ngModel)]="question.risposta">
+                                   [(ngModel)]="question.risposta" required>
                                 </label>
                             </td>
                         </tr>
@@ -221,7 +222,7 @@
                             <td *ngFor="let option of ratingMultipliers">
                                 <label>
                                     <input type="radio" name="question-{{ question.id }}" [value]="option"
-                                   [(ngModel)]="question.risposta">
+                                   [(ngModel)]="question.risposta" required>
                                 </label>
                             </td>
                         </tr>
@@ -243,7 +244,7 @@
                             <td *ngFor="let option of ratingMultipliers">
                                 <label>
                                     <input type="radio" name="question-{{ question.id }}" [value]="option"
-                                   [(ngModel)]="question.risposta">
+                                   [(ngModel)]="question.risposta" required>
                                 </label>
                             </td>
                         </tr>
@@ -265,7 +266,7 @@
                             <td *ngFor="let option of ratingMultipliers">
                                 <label>
                                     <input type="radio" name="question-{{ question.id }}" [value]="option"
-                                   [(ngModel)]="question.risposta">
+                                   [(ngModel)]="question.risposta" required>
                                 </label>
                             </td>
                         </tr>
@@ -287,24 +288,24 @@
                             <td *ngFor="let option of ratingMultipliers">
                                 <label>
                                     <input type="radio" name="question-{{ question.id }}" [value]="option"
-                                   [(ngModel)]="question.risposta">
+                                   [(ngModel)]="question.risposta" required>
                                 </label>
                             </td>
                         </tr>
                     </tbody>
                 </table>
 
-    <button style="background-color: cadetblue;" (click)="calculatePoints()">Calcola punteggio</button>
+    <button type="button" style="background-color: cadetblue;" (click)="calculatePoints()">Calcola punteggio</button>
     
     <div style="align-self: center;">
     <button style="background-color: rgb(151, 236, 236);" routerLink="/">Indietro</button>
-    <button (click)="submitRatings()">Invia</button>
+    <button [disabled]="!form.valid">Invia</button>
     <span *ngIf="totalRatingPoints !== null" [style.color]="getColorForRating(totalRatingPoints)">Punteggio totale: {{ totalRatingPoints }}</span>
     <div class="legend">
-        <span style="color: green;">●</span> Condizione ottima<br>
-        <span style="color: lightcoral;">●</span> Condizione media<br>
-        <span style="color: red;">●</span> Condizione pessima
+        <span style="color: green;">●</span> Condizione ottima - controlli ogni 3 anni - RANGE: 124.8 in sù<br>
+        <span style="color: lightcoral;">●</span> Condizione media - controlli ogni 2 anni - RANGE: 62.4 a 124.8<br>
+        <span style="color: red;">●</span> Condizione pessima - controlli ogni anno - RANGE: 31.2 a 62.4
       </div>
     </div>
     </div>
-    
+</form>
