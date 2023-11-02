@@ -32,34 +32,32 @@ export class ViewRatingsComponent implements OnInit {
       next: data => {
         if (data && data.data) {
           this.ratings = data.data;
-
+  
           // Itera attraverso ogni elemento di this.ratings
           this.ratings.forEach(x => {
-            // Analizza l'elemento corrente come JSON
-            let currentRating = JSON.parse(x.data);
-
-            // Crea un nuovo oggetto di tipo Rating utilizzando i valori estratti da currentRating
+            // Crea un nuovo oggetto di tipo Rating utilizzando i valori estratti da x
             let newRating: Rating = {
-              verbale: currentRating?.verbale, // Usa l'operatore || per fornire un valore di default se verbale è undefined
+              verbale: x?.verbale,
               timestamp: x?.timestamp,
               id: x?.id,
-              operatore: currentRating?.operatore,
-              ditta: currentRating?.ditta,
-              tipologiaAttivita: currentRating?.tipologiaAttivita,
-              questions: currentRating?.questions,
-              totalRating: currentRating.totalRating // Assumendo che tu non stia ottenendo il totalRating dal tuo servizio, ma lo stia calcolando o impostando in seguito
+              operatore: x?.operatore,
+              ditta: x?.ditta,
+              tipologiaAttivita: x?.tipologiaAttivita,
+              questions: JSON.parse(x?.questions), // Analizza questions come JSON
+              totalRating: x.totalRating // Assumendo che tu non stia ottenendo il totalRating dal tuo servizio, ma lo stia calcolando o impostando in seguito
             };
-
+  
             // Aggiungi il nuovo oggetto Rating all'array newRatings
             this.newRatings?.push(newRating);
-
-            console.log(this.newRatings)
+  
+            console.log(this.newRatings);
           });
         }
       },
       error: error => console.error(error)
     });
   }
+  
 
 
   showRatingDetails(rating: any): void {

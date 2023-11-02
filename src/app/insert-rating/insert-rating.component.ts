@@ -492,40 +492,6 @@ export class InsertRatingComponent {
     }
   ];
 
-  checkFormValidity() {
-    const extractAnswers = (questions: (RatingQuestion | string)[]) => {
-      return questions.map(q => {
-        if (typeof q === 'string') {
-          return q;
-        } else {
-          return q.risposta?.testo; // o qualsiasi altra proprietà di 'risposta' che vuoi utilizzare
-        }
-      });
-    };
-  
-    this.isFormValid = ![
-      this.verbale,
-      this.data,
-      this.operatore,
-      this.ditta,
-      this.tipologiaAttivita,
-      ...extractAnswers(this.questionsCAP1),
-      ...extractAnswers(this.questionsCAP2),
-      ...extractAnswers(this.questionsCAP5),
-      ...extractAnswers(this.questionsCAP6),
-      ...extractAnswers(this.questionsCAP7),
-      ...extractAnswers(this.questionsCAP8),
-      ...extractAnswers(this.questionsCAP9),
-      ...extractAnswers(this.questionsCAP10),
-      ...extractAnswers(this.questionsCAP12),
-      ...extractAnswers(this.questionEtichettaturaProdottiAlimentari),
-      ...extractAnswers(this.questionPrincipiSistemaHACCP),
-      ...extractAnswers(this.questionSistemaDiAutocontrollo),
-    ].some(el => el == null || el === '');
-  
-    console.log(`Il form è ${this.isFormValid ? 'valido' : 'non valido'}`);
-  }
-
   getColorForRating(rating: number): string {
     if (rating >= 31.2 && rating < 62.4) {
       return 'red';
