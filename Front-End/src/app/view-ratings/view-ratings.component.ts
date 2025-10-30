@@ -87,17 +87,25 @@ export class ViewRatingsComponent implements OnInit {
     }
   }
 
-  deleteRating(rating: Rating): void {
-    this.ratingService.deleteRatingById(Number(rating.id)).subscribe({
-      next: response => {
-        console.log(response.message);
-        this.newRatings = this.newRatings.filter(r => r.id !== rating.id);
-        // Aggiorna la paginazione se necessario
-        if (this.currentPage > this.totalPages) this.currentPage = this.totalPages || 1;
-      },
-      error: err => console.error("Errore nell'eliminazione del rating:", err)
-    });
+deleteRating(rating: Rating): void {
+  const conferma = window.confirm(`Ma sei sicuro di voler eliminare il verbale "${rating.verbale}"?`);
+
+  if (!conferma) {
+    console.log('Eliminazione annullata');
+    return;
   }
+
+  this.ratingService.deleteRatingById(Number(rating.id)).subscribe({
+    next: response => {
+      console.log(response.message);
+      this.newRatings = this.newRatings.filter(r => r.id !== rating.id);
+      // Aggiorna la paginazione se necessario
+      if (this.currentPage > this.totalPages) this.currentPage = this.totalPages || 1;
+    },
+    error: err => console.error("Errore nell'eliminazione del rating:", err)
+  });
+}
+
 
   downloadExcel(ratingId: string): void {
     this.ratingService.downloadRatingExcel(ratingId).subscribe(data => {
