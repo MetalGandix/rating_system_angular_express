@@ -1,5 +1,13 @@
 <button routerLink="/">Torna alla pagina iniziale</button>
 
+<div class="search-bar">
+  <input
+    type="text"
+    placeholder="Cerca per Verbale, Ditta o Data..."
+    [(ngModel)]="searchTerm"
+  />
+</div>
+
 <table *ngIf="paginatedRatings.length">
   <thead>
     <tr>
@@ -23,7 +31,7 @@
   </tbody>
 </table>
 
-<p *ngIf="!newRatings.length">Nessun rating disponibile.</p>
+<p *ngIf="!paginatedRatings.length">Nessun risultato trovato.</p>
 
 <!-- Paginazione -->
 <div class="pagination" *ngIf="newRatings.length > itemsPerPage">
@@ -35,7 +43,7 @@
 <!-- Modale per dettagli -->
 <div class="modal-overlay" *ngIf="selectedRating" (click)="closeModal($event)">
   <div class="modal-content" (click)="$event.stopPropagation()">
-    <button class="close-btn" (click)="selectedRating = null">&times;</button>
+    <button style="margin-bottom: 15px;" (click)="selectedRating = null">Chiudi</button>
 
     <h2>{{ selectedRating.verbale }}</h2>
     <p><strong>Operatore:</strong> {{ selectedRating.operatore }}</p>
@@ -54,5 +62,6 @@
     </ul>
 
     <p><strong>Rating Totale:</strong> {{ selectedRating.totalRating }}</p>
+    <button style="margin-top: 5px;" (click)="selectedRating = null">Chiudi</button>
   </div>
 </div>

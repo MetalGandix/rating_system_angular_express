@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RatingService } from '../rating.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-view-ratings',
@@ -12,11 +13,13 @@ export class ViewRatingsComponent implements OnInit {
   newRatings: Rating[] = [];
   selectedRating: Rating | null = null;
 
+  searchTerm: string = '';
+
   // --- PAGINAZIONE ---
   currentPage = 1;
   itemsPerPage = 10;
 
-  constructor(private ratingService: RatingService) {}
+  constructor(private ratingService: RatingService) { }
 
   ngOnInit(): void {
     this.getRatings();
@@ -60,14 +63,24 @@ export class ViewRatingsComponent implements OnInit {
 
   // --- PAGINAZIONE LOGICA ---
   get paginatedRatings(): Rating[] {
+    const filtered = this.newRatings.filter(r =>
+      r.verbale.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      r.ditta.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      r.timestamp.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    return this.newRatings.slice(startIndex, startIndex + this.itemsPerPage);
+    return filtered.slice(startIndex, startIndex + this.itemsPerPage);
   }
 
   get totalPages(): number {
-    return Math.ceil(this.newRatings.length / this.itemsPerPage);
+    const filtered = this.newRatings.filter(r =>
+      r.verbale.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      r.ditta.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      r.timestamp.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    return Math.ceil(filtered.length / this.itemsPerPage) || 1;
   }
-
   nextPage(): void {
     if (this.currentPage < this.totalPages) this.currentPage++;
   }
@@ -87,24 +100,24 @@ export class ViewRatingsComponent implements OnInit {
     }
   }
 
-deleteRating(rating: Rating): void {
-  const conferma = window.confirm(`Ma sei sicuro di voler eliminare il verbale "${rating.verbale}"?`);
+  deleteRating(rating: Rating): void {
+    const conferma = window.confirm(`Ma sei sicuro di voler eliminare il verbale "${rating.verbale}"?`);
 
-  if (!conferma) {
-    console.log('Eliminazione annullata');
-    return;
+    if (!conferma) {
+      console.log('Eliminazione annullata');
+      return;
+    }
+
+    this.ratingService.deleteRatingById(Number(rating.id)).subscribe({
+      next: response => {
+        console.log(response.message);
+        this.newRatings = this.newRatings.filter(r => r.id !== rating.id);
+        // Aggiorna la paginazione se necessario
+        if (this.currentPage > this.totalPages) this.currentPage = this.totalPages || 1;
+      },
+      error: err => console.error("Errore nell'eliminazione del rating:", err)
+    });
   }
-
-  this.ratingService.deleteRatingById(Number(rating.id)).subscribe({
-    next: response => {
-      console.log(response.message);
-      this.newRatings = this.newRatings.filter(r => r.id !== rating.id);
-      // Aggiorna la paginazione se necessario
-      if (this.currentPage > this.totalPages) this.currentPage = this.totalPages || 1;
-    },
-    error: err => console.error("Errore nell'eliminazione del rating:", err)
-  });
-}
 
 
   downloadExcel(ratingId: string): void {
