@@ -1,5 +1,6 @@
 <button routerLink="/">Torna alla pagina iniziale</button>
-<table *ngIf="ratings.length">
+
+<table *ngIf="paginatedRatings.length">
   <thead>
     <tr>
       <th>Verbale n.</th>
@@ -9,38 +10,49 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let rating of newRatings">
+    <tr *ngFor="let rating of paginatedRatings">
       <td>{{ rating.verbale }}</td>
       <td>{{ rating.ditta }}</td>
       <td>{{ rating.timestamp }}</td>
       <td>
-          <button (click)="downloadExcel(rating.id)">Scarica Excel</button>
-          <button (click)="showRatingDetails(rating)">Premi per vedere il rating</button>
-          <button (click)="deleteRating(rating)">Elimina</button>
+        <button (click)="downloadExcel(rating.id)">Scarica Excel</button>
+        <button (click)="showRatingDetails(rating)">Vedi dettagli</button>
+        <button (click)="deleteRating(rating)">Elimina</button>
       </td>
     </tr>
   </tbody>
 </table>
 
-<div *ngIf="selectedRating">
-  <h2>{{ selectedRating.verbale }}</h2>
-  <p><strong>Operatore:</strong> {{ selectedRating.operatore }}</p>
-  <p><strong>Ditta:</strong> {{ selectedRating.ditta }}</p>
-  <p><strong>Tipologia Attività:</strong> {{ selectedRating.tipologiaAttivita }}</p>
+<p *ngIf="!newRatings.length">Nessun rating disponibile.</p>
 
-  <h3>Domande</h3>
-  <ul>
-    <li *ngFor="let question of selectedRating.questions">
-      {{ question.id }}. {{ question.descrizione }}
-      <ul>
-        <li><strong>Risposta:</strong> {{ question.risposta.testo }}</li>
-        <li><strong>Peso:</strong> {{ question.peso }}</li>
-      </ul>
-    </li>
-  </ul>
-
-  <p><strong>Rating Totale:</strong> {{ selectedRating.totalRating }}</p>
-  <button (click)="selectedRating = null">Chiudi dettagli</button> <!-- Bottono per chiudere i dettagli -->
+<!-- Paginazione -->
+<div class="pagination" *ngIf="newRatings.length > itemsPerPage">
+  <button (click)="prevPage()" [disabled]="currentPage === 1">Precedente</button>
+  <span>Pagina {{ currentPage }} di {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages">Successiva</button>
 </div>
 
-<p *ngIf="!ratings.length">Nessun rating disponibile.</p>
+<!-- Modale per dettagli -->
+<div class="modal-overlay" *ngIf="selectedRating" (click)="closeModal($event)">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="selectedRating = null">&times;</button>
+
+    <h2>{{ selectedRating.verbale }}</h2>
+    <p><strong>Operatore:</strong> {{ selectedRating.operatore }}</p>
+    <p><strong>Ditta:</strong> {{ selectedRating.ditta }}</p>
+    <p><strong>Tipologia Attività:</strong> {{ selectedRating.tipologiaAttivita }}</p>
+
+    <h3>Domande</h3>
+    <ul>
+      <li *ngFor="let question of selectedRating.questions">
+        {{ question.id }}. {{ question.descrizione }}
+        <ul>
+          <li><strong>Risposta:</strong> {{ question.risposta.testo }}</li>
+          <li><strong>Peso:</strong> {{ question.peso }}</li>
+        </ul>
+      </li>
+    </ul>
+
+    <p><strong>Rating Totale:</strong> {{ selectedRating.totalRating }}</p>
+  </div>
+</div>

@@ -9,8 +9,12 @@ import { RatingService } from '../rating.service';
 export class ViewRatingsComponent implements OnInit {
 
   ratings: any[] = [];
-  selectedRating: any = null;
   newRatings: Rating[] = [];
+  selectedRating: Rating | null = null;
+
+  // --- PAGINAZIONE ---
+  currentPage = 1;
+  itemsPerPage = 10;
 
   constructor(private ratingService: RatingService) {}
 
@@ -27,7 +31,6 @@ export class ViewRatingsComponent implements OnInit {
 
           this.ratings.forEach(x => {
             try {
-              // x è già un oggetto JSON valido
               const questions =
                 typeof x.questions === 'string'
                   ? JSON.parse(x.questions)
@@ -49,16 +52,39 @@ export class ViewRatingsComponent implements OnInit {
               console.error('Errore nel parsing del record', x.id, err);
             }
           });
-
-          console.log('newRatings:', this.newRatings);
         }
       },
       error: err => console.error('Errore caricamento ratings:', err)
     });
   }
 
-  showRatingDetails(rating: any): void {
-    this.selectedRating = this.selectedRating === rating ? null : rating;
+  // --- PAGINAZIONE LOGICA ---
+  get paginatedRatings(): Rating[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.newRatings.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.newRatings.length / this.itemsPerPage);
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) this.currentPage++;
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) this.currentPage--;
+  }
+
+  // --- ALTRO ---
+  showRatingDetails(rating: Rating): void {
+    this.selectedRating = rating;
+  }
+
+  closeModal(event: MouseEvent): void {
+    if ((event.target as HTMLElement).classList.contains('modal-overlay')) {
+      this.selectedRating = null;
+    }
   }
 
   deleteRating(rating: Rating): void {
@@ -66,6 +92,8 @@ export class ViewRatingsComponent implements OnInit {
       next: response => {
         console.log(response.message);
         this.newRatings = this.newRatings.filter(r => r.id !== rating.id);
+        // Aggiorna la paginazione se necessario
+        if (this.currentPage > this.totalPages) this.currentPage = this.totalPages || 1;
       },
       error: err => console.error("Errore nell'eliminazione del rating:", err)
     });
